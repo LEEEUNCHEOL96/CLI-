@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class App {
     Scanner sc;
+    List<Article> articleList = new ArrayList<>(); // 글로벌영역으로 빼주기
 
     App(Scanner sc) {
         this.sc = sc;
@@ -11,8 +12,6 @@ public class App {
 
     public void run() {
         int lastId = 1;
-        List<Article> articleList = new ArrayList<>();
-
         System.out.println("== 게시판 앱 ==");
 
         while (true) {
@@ -47,51 +46,52 @@ public class App {
 
                 String key = comandList2[0];
                 String removeId = comandList2[1];
-                int reId = Integer.parseInt(removeId);
+                int id2 = Integer.parseInt(removeId);
 
-                Article article = null;
-                for (int i = 0; i < articleList.size(); i++) {
-                    if (articleList.get(i).getId() == reId) {
-                        article = articleList.get(i);
-                    }
-                }
+                Article article = _getFindId(id2);
+
                 if (article == null) {
-                    System.out.printf("%d번 게시물은 존재하지 않습니다.\n", reId);
+                    System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id2);
                 } else {
                     articleList.remove(article);
-                    System.out.printf("%d번 게시물이 삭제되었습니다.\n", reId);
+                    System.out.printf("%d번 게시물이 삭제되었습니다.\n", id2);
                 }
-            } else if (command.startsWith("수정")){ // 수정 기능 추가
+            } else if (command.startsWith("수정")) {
                 String[] comandList = command.split("\\?", 2);
                 String[] comandList2 = comandList[1].split("=", 2);
 
                 String key = comandList2[0];
                 String modifiedId = comandList2[1];
-                int moId = Integer.parseInt(modifiedId);
+                int id2 = Integer.parseInt(modifiedId);
 
 
-                Article article = null;
+                Article article = _getFindId(id2);
 
-                for ( int i = 0 ; i < articleList.size() ; i ++ ){
-                    if (articleList.get(i).getId() == moId){
-                        article = articleList.get(i);
-                    }
-                }if ( article == null){ //수정 예외처리 추가
-                    System.out.printf("%d번 게시물은 존재하지 않습니다.\n", moId);
-                }else {  // 수정내역
-                    System.out.printf("제목(기존) : %s \n",article.getSubject());
+                if (article == null) {
+                    System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id2);
+                } else {
+                    System.out.printf("제목(기존) : %s \n", article.getSubject());
                     System.out.print("제목 : ");
                     String modifySubject = sc.nextLine();
                     article.setSubject(modifySubject);
 
-                    System.out.printf("내용(기존) : %s \n",article.getContent());
+                    System.out.printf("내용(기존) : %s \n", article.getContent());
                     System.out.print("내용 : ");
                     String modifyContent = sc.nextLine();
                     article.setModify(modifyContent);
 
-                    System.out.printf("%d번 게시물이 수정 되었습니다. \n",moId);
+                    System.out.printf("%d번 게시물이 수정 되었습니다. \n", id2);
                 }
             }
         }
+    }
+
+    private Article _getFindId(int id2) { //중복로직 제거
+        for (Article i : articleList) {
+            if (i.getId() == id2) {
+                return i;
+            }
+        }
+        return null;
     }
 }
