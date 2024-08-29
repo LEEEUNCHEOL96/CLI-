@@ -1,17 +1,21 @@
+import article.Article;
+import article.ArticleController;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class App {
     Scanner sc;
-    List<Article> articleList = new ArrayList<>(); // 글로벌영역으로 빼주기
+    ArticleController articleController;
 
     App(Scanner sc) {
         this.sc = sc;
+        articleController = new ArticleController(sc);
+
     }
 
     public void run() {
-        int lastId = 1;
         System.out.println("== 게시판 앱 ==");
 
         while (true) {
