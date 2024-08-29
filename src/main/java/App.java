@@ -55,11 +55,41 @@ public class App {
                         article = articleList.get(i);
                     }
                 }
-                if (article == null) {  // 삭제 예외처리 추가
+                if (article == null) {
                     System.out.printf("%d번 게시물은 존재하지 않습니다.\n", reId);
                 } else {
                     articleList.remove(article);
                     System.out.printf("%d번 게시물이 삭제되었습니다.\n", reId);
+                }
+            } else if (command.startsWith("수정")){ // 수정 기능 추가
+                String[] comandList = command.split("\\?", 2);
+                String[] comandList2 = comandList[1].split("=", 2);
+
+                String key = comandList2[0];
+                String modifiedId = comandList2[1];
+                int moId = Integer.parseInt(modifiedId);
+
+
+                Article article = null;
+
+                for ( int i = 0 ; i < articleList.size() ; i ++ ){
+                    if (articleList.get(i).getId() == moId){
+                        article = articleList.get(i);
+                    }
+                }if ( article == null){ //수정 예외처리 추가
+                    System.out.printf("%d번 게시물은 존재하지 않습니다.\n", moId);
+                }else {  // 수정내역
+                    System.out.printf("제목(기존) : %s \n",article.getSubject());
+                    System.out.print("제목 : ");
+                    String modifySubject = sc.nextLine();
+                    article.setSubject(modifySubject);
+
+                    System.out.printf("내용(기존) : %s \n",article.getContent());
+                    System.out.print("내용 : ");
+                    String modifyContent = sc.nextLine();
+                    article.setModify(modifyContent);
+
+                    System.out.printf("%d번 게시물이 수정 되었습니다. \n",moId);
                 }
             }
         }

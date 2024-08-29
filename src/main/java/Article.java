@@ -20,4 +20,12 @@ public class Article {
     String getContent() {
         return this.content;
     }
+
+    public void setSubject(String subject) { //수정 제목 저장
+        this.subject = subject;
+    }
+
+    public void setModify(String content) { // 수정 내용 저장
+        this.content = content;
+    }
 }
