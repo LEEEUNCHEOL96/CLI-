@@ -1,7 +1,21 @@
 package org.example;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("CLI 게시판 과제 제출용 시작지점");
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(" == 게시판 앱 == ");
+
+        while(true){
+            System.out.print("명령 ) ");
+            String command = sc.nextLine();
+
+            if(command.equals("종료")){
+                break;
+            }
+
+        }sc.close();
     }
 }
