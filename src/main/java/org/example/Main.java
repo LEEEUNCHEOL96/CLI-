@@ -19,6 +19,7 @@ public class Main {
                 sc.nextLine();
                 System.out.print("내용 : ");
                 sc.nextLine();
+                System.out.println("1번 게시물이 등록되었습니다.");
             }
         }sc.close();
     }
