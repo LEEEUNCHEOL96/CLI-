@@ -1,23 +1,28 @@
 package org.example;
 
 public class Request {
+    private String actionCode;
     private int  id;
-    private String commandList2;
+
 
     public Request(String command){
         String[] commandList = command.split("\\?", 2);
-        String commandList2 = commandList[0];
-        String[] commandList3 = commandList[1].split("=", 2);
+        actionCode = commandList[0];
+        if(commandList.length == 1) return; /// 해결완료...드디어 마침내...
 
-        String key = commandList3[0];
-        String removeId = commandList3[1];
-        int id = Integer.parseInt(removeId);
+        String[] commandList2 = commandList[1].split("=", 2);
+
+        String key = commandList2[0];
+        String removeId = commandList2[1];
+        id = Integer.parseInt(removeId);
+
     }
 
-    public String getCommandList2(){
-        return commandList2;
+    public String getActionCode(){
+        return actionCode;
     }
     public int getId(){
         return id;
     }
 }
+
