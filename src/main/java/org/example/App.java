@@ -1,6 +1,7 @@
-import article.Article;
-import article.ArticleController;
-import system.SystemController;
+package org.example; // 패키지 구조 변경
+
+import org.example.article.ArticleController;
+import org.example.system.SystemController;
 
 import java.util.Scanner;
 
@@ -9,11 +10,9 @@ public class App {
     ArticleController articleController;
     SystemController systemController;
 
-    App(Scanner sc) {
-        this.sc = sc;
+    App() {
         articleController = new ArticleController(sc);
         systemController = new SystemController();
-
     }
 
     public void run() {
@@ -21,7 +20,7 @@ public class App {
 
         while (true) {
             System.out.print("명령) ");
-            String command = sc.nextLine().trim();
+            String command = Container.getSc().nextLine().trim(); // // Container 로 부터 Scanner를 받아온다.
 
             if (command.equals("종료")) {
                 systemController.exit();

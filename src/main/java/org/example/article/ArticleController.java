@@ -1,4 +1,5 @@
-package article;
+package org.example.article; // 패키지 구조 변경
+import org.example.Container;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +16,9 @@ public class ArticleController {
 
     public void write() {
         System.out.print("제목 : ");
-        String subject = sc.nextLine().trim();
+        String subject = Container.getSc().nextLine().trim(); // 컨테이너 클래스로부터 getSc를 호출
         System.out.print("내용 : ");
-        String content = sc.nextLine().trim();
+        String content = Container.getSc().nextLine().trim(); // 컨테이너 클래스로부터 getSc를 호출
         System.out.printf("%d번 게시물이 등록되었습니다.\n", lastId);
 
         Article article = new Article(lastId, subject, content);
@@ -80,12 +81,12 @@ public class ArticleController {
         } else {
             System.out.printf("제목(기존) : %s \n", article.getSubject());
             System.out.print("제목 : ");
-            String modifySubject = sc.nextLine();
+            String modifySubject = Container.getSc().nextLine(); // 컨테이너 클래스로부터 getSc를 호출
             article.setSubject(modifySubject);
 
             System.out.printf("내용(기존) : %s \n", article.getContent());
             System.out.print("내용 : ");
-            String modifyContent = sc.nextLine();
+            String modifyContent = Container.getSc().nextLine(); // 컨테이너 클래스로부터 getSc를 호출
             article.setModify(modifyContent);
 
             System.out.printf("%d번 게시물이 수정 되었습니다. \n", id);
