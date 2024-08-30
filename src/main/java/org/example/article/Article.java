@@ -1,5 +1,4 @@
-package org.example.article; // 패키지 구조 변경
-
+package org.example.article;
 public class Article {
     private final int id;
     private String subject;
