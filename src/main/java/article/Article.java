@@ -19,15 +19,15 @@ public class Article {
         return this.subject;
     }
 
-    public void setSubject(String subject) { //수정 제목 저장
-        this.subject = subject;
-    }
-
     String getContent() {
         return this.content;
     }
 
-    public void setModify(String content) { // 수정 내용 저장
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void setModify(String content) {
         this.content = content;
     }
 }

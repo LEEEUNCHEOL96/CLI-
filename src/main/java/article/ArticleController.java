@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ArticleController { //컨트롤러에 담기완료 commit 남기기용
+public class ArticleController {
     Scanner sc;
     List<Article> articleList = new ArrayList<>();
     int lastId = 1;
@@ -31,9 +31,9 @@ public class ArticleController { //컨트롤러에 담기완료 commit 남기기
         System.out.println("-----------------");
 
         for (int i = articleList.size() - 1; i >= 0; i--) {
-        Article article = articleList.get(i);
-        System.out.printf("%d / %s / %s\n", article.getId(), article.getSubject(), article.getContent());
-    }
+            Article article = articleList.get(i);
+            System.out.printf("%d / %s / %s\n", article.getId(), article.getSubject(), article.getContent());
+        }
     }
 
     public void delete(String command) {
@@ -42,22 +42,22 @@ public class ArticleController { //컨트롤러에 담기완료 commit 남기기
 
         String key = comandList2[0];
         String removeId = comandList2[1];
-        int id2 = Integer.parseInt(removeId);
+        int id = Integer.parseInt(removeId);
 
-        Article article = _getFindId(id2);
+        Article article = _getFindId(id);
 
         if (article == null) {
-            System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id2);
+            System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
         } else {
             articleList.remove(article);
-            System.out.printf("%d번 게시물이 삭제되었습니다.\n", id2);
+            System.out.printf("%d번 게시물이 삭제되었습니다.\n", id);
         }
     }
 
 
-    private Article _getFindId(int id2) { //중복로직 제거
+    private Article _getFindId(int id) {
         for (Article i : articleList) {
-            if (i.getId() == id2) {
+            if (i.getId() == id) {
                 return i;
             }
         }
@@ -70,13 +70,13 @@ public class ArticleController { //컨트롤러에 담기완료 commit 남기기
 
         String key = comandList2[0];
         String modifiedId = comandList2[1];
-        int id2 = Integer.parseInt(modifiedId);
+        int id = Integer.parseInt(modifiedId);
 
 
-        Article article = _getFindId(id2);
+        Article article = _getFindId(id);
 
         if (article == null) {
-            System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id2);
+            System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
         } else {
             System.out.printf("제목(기존) : %s \n", article.getSubject());
             System.out.print("제목 : ");
@@ -88,7 +88,7 @@ public class ArticleController { //컨트롤러에 담기완료 commit 남기기
             String modifyContent = sc.nextLine();
             article.setModify(modifyContent);
 
-            System.out.printf("%d번 게시물이 수정 되었습니다. \n", id2);
+            System.out.printf("%d번 게시물이 수정 되었습니다. \n", id);
         }
     }
 }
