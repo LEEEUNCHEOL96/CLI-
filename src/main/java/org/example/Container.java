@@ -1,8 +1,8 @@
-package org.example; // 패키지 구조 변경
+package org.example;
 
 import java.util.Scanner;
 
-public class Container { // 컨태이너 class 추가
+public class Container {
     private static Scanner sc;
 
     public static void start() {

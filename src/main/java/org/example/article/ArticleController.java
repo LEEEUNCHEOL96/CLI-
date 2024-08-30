@@ -1,24 +1,19 @@
-package org.example.article; // 패키지 구조 변경
+package org.example.article;
 import org.example.Container;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class ArticleController {
-    Scanner sc;
     List<Article> articleList = new ArrayList<>();
     int lastId = 1;
 
-    public ArticleController(Scanner sc) {
-        this.sc = sc;
-    }
 
     public void write() {
         System.out.print("제목 : ");
-        String subject = Container.getSc().nextLine().trim(); // 컨테이너 클래스로부터 getSc를 호출
+        String subject = Container.getSc().nextLine().trim();
         System.out.print("내용 : ");
-        String content = Container.getSc().nextLine().trim(); // 컨테이너 클래스로부터 getSc를 호출
+        String content = Container.getSc().nextLine().trim();
         System.out.printf("%d번 게시물이 등록되었습니다.\n", lastId);
 
         Article article = new Article(lastId, subject, content);
@@ -37,14 +32,7 @@ public class ArticleController {
         }
     }
 
-    public void delete(String command) {
-        String[] comandList = command.split("\\?", 2);
-        String[] comandList2 = comandList[1].split("=", 2);
-
-        String key = comandList2[0];
-        String removeId = comandList2[1];
-        int id = Integer.parseInt(removeId);
-
+    public void delete(int id) {
         Article article = _getFindId(id);
 
         if (article == null) {
@@ -56,24 +44,7 @@ public class ArticleController {
     }
 
 
-    private Article _getFindId(int id) {
-        for (Article i : articleList) {
-            if (i.getId() == id) {
-                return i;
-            }
-        }
-        return null;
-    }
-
-    public void modify(String command) {
-        String[] comandList = command.split("\\?", 2);
-        String[] comandList2 = comandList[1].split("=", 2);
-
-        String key = comandList2[0];
-        String modifiedId = comandList2[1];
-        int id = Integer.parseInt(modifiedId);
-
-
+    public void modify(int id) {
         Article article = _getFindId(id);
 
         if (article == null) {
@@ -81,16 +52,25 @@ public class ArticleController {
         } else {
             System.out.printf("제목(기존) : %s \n", article.getSubject());
             System.out.print("제목 : ");
-            String modifySubject = Container.getSc().nextLine(); // 컨테이너 클래스로부터 getSc를 호출
+            String modifySubject = Container.getSc().nextLine();
             article.setSubject(modifySubject);
 
             System.out.printf("내용(기존) : %s \n", article.getContent());
             System.out.print("내용 : ");
-            String modifyContent = Container.getSc().nextLine(); // 컨테이너 클래스로부터 getSc를 호출
+            String modifyContent = Container.getSc().nextLine();
             article.setModify(modifyContent);
 
             System.out.printf("%d번 게시물이 수정 되었습니다. \n", id);
         }
+
+    }
+    private Article _getFindId(int id) {
+        for (Article i : articleList) {
+            if (i.getId() == id) {
+                return i;
+            }
+        }
+        return null;
     }
 }
 
