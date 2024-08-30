@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ArticleController { //컨트롤러에 담기
+public class ArticleController { //컨트롤러에 담기완료 commit 남기기용
     Scanner sc;
     List<Article> articleList = new ArrayList<>();
     int lastId = 1;
